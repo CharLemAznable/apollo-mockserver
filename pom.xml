@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.github.charlemaznable</groupId>
+        <artifactId>char-dependencies</artifactId>
+        <version>0.0.7-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>apollo-mockserver</artifactId>
+    <version>0.0.7-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>Apollo Mockserver</name>
+    <url>https://github.com/CharLemAznable/apollo-mockserver</url>
+    <description>Apollo Mockserver, not limited to Junit4.</description>
+
+    <scm>
+        <connection>scm:git:https://github.com/CharLemAznable/apollo-mockserver.git</connection>
+        <developerConnection>scm:git:https://github.com/CharLemAznable/apollo-mockserver.git</developerConnection>
+        <url>https://github.com/CharLemAznable/apollo-mockserver</url>
+    </scm>
+
+    <repositories>
+        <repository>
+            <id>central</id>
+            <url>https://repo1.maven.org/maven2/</url>
+            <layout>default</layout>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>sonatype</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+            <layout>default</layout>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <properties>
+        <sonar.projectKey>CharLemAznable_apollo-mockserver</sonar.projectKey>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.ctrip.framework.apollo</groupId>
+            <artifactId>apollo-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>mockwebserver</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>
