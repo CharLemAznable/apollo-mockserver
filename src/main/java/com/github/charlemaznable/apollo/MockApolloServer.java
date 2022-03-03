@@ -20,7 +20,6 @@ import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.RecordedRequest;
 import org.slf4j.helpers.Util;
 
-import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +30,7 @@ import static com.google.common.collect.Lists.newArrayList;
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 import static lombok.AccessLevel.PRIVATE;
+import static org.joor.Reflect.on;
 
 @NoArgsConstructor(access = PRIVATE)
 public final class MockApolloServer {
@@ -42,18 +42,11 @@ public final class MockApolloServer {
     private static final Map<String, List<Prop>>
             overriddenPropertiesOfNamespace = Maps.newConcurrentMap();
     private static ConfigServiceLocator configServiceLocator;
-    private static Method configServiceLocatorClear;
     private static MockWebServer server;
 
     static {
-        try {
-            System.setProperty("apollo.longPollingInitialDelayInMills", "0");
-            configServiceLocator = ApolloInjector.getInstance(ConfigServiceLocator.class);
-            configServiceLocatorClear = ConfigServiceLocator.class.getDeclaredMethod("initConfigServices");
-            configServiceLocatorClear.setAccessible(true);
-        } catch (NoSuchMethodException e) {
-            Util.report("init mock apollo server error", e);
-        }
+        System.setProperty("apollo.longPollingInitialDelayInMills", "0");
+        configServiceLocator = ApolloInjector.getInstance(ConfigServiceLocator.class);
     }
 
     @SneakyThrows
@@ -92,9 +85,10 @@ public final class MockApolloServer {
             try {
                 clear();
                 server.close();
-                server = null;
             } catch (Exception e) {
                 Util.report("stop apollo server error", e);
+            } finally {
+                server = null;
             }
         }
     }
@@ -151,7 +145,7 @@ public final class MockApolloServer {
     @SneakyThrows
     private static void mockConfigServiceUrl(String url) {
         System.setProperty(ApolloClientSystemConsts.APOLLO_CONFIG_SERVICE, url);
-        configServiceLocatorClear.invoke(configServiceLocator);
+        on(configServiceLocator).call("initConfigServices");
     }
 
     private static void overrideProperty(String namespace, String someKey, String someValue) {
