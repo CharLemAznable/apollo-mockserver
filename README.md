@@ -25,7 +25,13 @@ JAVA常用工具包.
 
 ##### Maven Dependency
 
-待发布.
+```xml
+<dependency>
+  <groupId>com.github.charlemaznable</groupId>
+  <artifactId>apollo-mockserver</artifactId>
+  <version>0.0.7</version>
+</dependency>
+```
 
 ##### Maven Dependency SNAPSHOT
 
@@ -33,6 +39,6 @@ JAVA常用工具包.
 <dependency>
   <groupId>com.github.charlemaznable</groupId>
   <artifactId>apollo-mockserver</artifactId>
-  <version>0.0.7-SNAPSHOT</version>
+  <version>0.0.8-SNAPSHOT</version>
 </dependency>
 ```
