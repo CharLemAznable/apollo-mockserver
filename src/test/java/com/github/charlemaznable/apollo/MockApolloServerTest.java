@@ -5,10 +5,12 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.val;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.testcontainers.shaded.org.awaitility.Awaitility.await;
 
+@ExtendWith({MockApolloServerForAll.class, MockApolloServerForEach.class})
 public class MockApolloServerTest {
 
     @Getter
@@ -17,19 +19,14 @@ public class MockApolloServerTest {
 
     @Test
     public void testMockApolloServer() {
-        MockApolloServer.setUpMockServer();
-
         val testConfig = ConfigService.getConfig("test");
         assertEquals("aaa", testConfig.getProperty("AAA", "AAA"));
         assertEquals("bbb", testConfig.getProperty("BBB", "BBB"));
         assertEquals("ccc", testConfig.getProperty("CCC", "ccc"));
-
-        MockApolloServer.tearDownMockServer();
     }
 
     @Test
     public void testMockApolloServerModify() {
-        MockApolloServer.setUpMockServer();
         val testConfig = ConfigService.getConfig("test");
         testConfig.addChangeListener(event ->
                 event.changedKeys().forEach(x -> changeCount++));
@@ -47,7 +44,5 @@ public class MockApolloServerTest {
         assertEquals("aaa", testConfig.getProperty("AAA", "aaa"));
         assertEquals("bbb", testConfig.getProperty("BBB", "BBB"));
         assertEquals("ccc", testConfig.getProperty("CCC", "ccc"));
-
-        MockApolloServer.tearDownMockServer();
     }
 }
