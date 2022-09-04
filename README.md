@@ -21,7 +21,7 @@
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=CharLemAznable_apollo-mockserver&metric=coverage)](https://sonarcloud.io/dashboard?id=CharLemAznable_apollo-mockserver)
 [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=CharLemAznable_apollo-mockserver&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=CharLemAznable_apollo-mockserver)
 
-JAVA常用工具包.
+Apollo配置Mock服务 JUnit5扩展.
 
 ##### Maven Dependency
 
