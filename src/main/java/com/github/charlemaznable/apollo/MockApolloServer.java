@@ -20,6 +20,7 @@ import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.RecordedRequest;
 import org.slf4j.helpers.Util;
 
+import javax.annotation.Nonnull;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,7 @@ import java.util.Properties;
 import static com.google.common.collect.Lists.newArrayList;
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
+import static java.util.Objects.requireNonNull;
 import static lombok.AccessLevel.PRIVATE;
 import static org.joor.Reflect.on;
 
@@ -41,7 +43,7 @@ public final class MockApolloServer {
     private static final Gson GSON = new Gson();
     private static final Map<String, List<Prop>>
             overriddenPropertiesOfNamespace = Maps.newConcurrentMap();
-    private static ConfigServiceLocator configServiceLocator;
+    private static final ConfigServiceLocator configServiceLocator;
     private static MockWebServer server;
 
     static {
@@ -56,14 +58,15 @@ public final class MockApolloServer {
 
             server = new MockWebServer();
             server.setDispatcher(new Dispatcher() {
+                @Nonnull
                 @Override
-                public MockResponse dispatch(RecordedRequest request) {
-                    if (request.getPath().startsWith("/notifications/v2")) {
-                        val notifications = request.getRequestUrl().queryParameter("notifications");
+                public MockResponse dispatch(@Nonnull RecordedRequest request) {
+                    if (requireNonNull(request.getPath()).startsWith("/notifications/v2")) {
+                        val notifications = requireNonNull(request.getRequestUrl()).queryParameter("notifications");
                         return new MockResponse().setResponseCode(200).setBody(mockLongPollBody(notifications));
                     }
-                    if (request.getPath().startsWith("/configs")) {
-                        val pathSegments = request.getRequestUrl().pathSegments();
+                    if (requireNonNull(request.getPath()).startsWith("/configs")) {
+                        val pathSegments = requireNonNull(request.getRequestUrl()).pathSegments();
                         // appId [ pathSegments.get(1) ] and
                         // cluster [ pathSegments.get(2) ] might be used in the future
                         val namespace = pathSegments.get(3);

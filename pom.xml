@@ -60,7 +60,7 @@
         </dependency>
         <dependency>
             <groupId>org.jooq</groupId>
-            <artifactId>joor-java-8</artifactId>
+            <artifactId>joor</artifactId>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
