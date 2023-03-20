@@ -29,7 +29,7 @@ Apollo配置Mock服务 JUnit5扩展.
 <dependency>
   <groupId>com.github.charlemaznable</groupId>
   <artifactId>apollo-mockserver</artifactId>
-  <version>2022.0.6</version>
+  <version>2022.0.7</version>
 </dependency>
 ```
 
@@ -39,7 +39,7 @@ Apollo配置Mock服务 JUnit5扩展.
 <dependency>
   <groupId>com.github.charlemaznable</groupId>
   <artifactId>apollo-mockserver</artifactId>
-  <version>2022.0.7-SNAPSHOT</version>
+  <version>2022.0.8-SNAPSHOT</version>
 </dependency>
 ```
 
