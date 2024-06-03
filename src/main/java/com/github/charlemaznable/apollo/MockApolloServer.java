@@ -18,7 +18,7 @@ import okhttp3.mockwebserver.Dispatcher;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.RecordedRequest;
-import org.slf4j.helpers.Util;
+import org.slf4j.helpers.Reporter;
 
 import javax.annotation.Nonnull;
 import java.lang.reflect.Type;
@@ -89,7 +89,7 @@ public final class MockApolloServer {
                 clear();
                 server.close();
             } catch (Exception e) {
-                Util.report("stop apollo server error", e);
+                Reporter.error("stop apollo server error", e);
             } finally {
                 server = null;
             }
